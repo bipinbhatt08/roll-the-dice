@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+         body{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            
+         }
+        .sides{
+            width: 80px;
+            height: 80px;
+            background: black;
+            position: absolute;
+            border: 1px solid white;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sides p{
+            color: white !important;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+
+        }
+        #dice{
+            transform-style: preserve-3d;
+            transform: translate3d(-40px,-40px,0) rotate3d(1,1,0,10deg);
+            
+        }
+        .rotate{
+            animation: spin3d 50ms ease-in infinite  ;
+
+        }
+        @keyframes spin3d {
+        0% {
+            transform: rotate3d(1, 1, 1, 0deg);
+        }
+        
+        100% {
+            transform: rotate3d(1, 1, 1, 360deg);
+        }
+        }
+        #front{
+        transform: translateZ(40px);
+        }
+        #back{
+            transform: translateZ(-40px) rotateY(180deg)  ;
+        }
+        #top{
+            transform: translateY(-40px) rotateX(90deg);
+        }
+        #bottom{
+            transform: translateY(40px) rotateX(-90deg);
+        }
+        #left{
+            transform: translateX(-40px) rotateY(-90deg);
+        }
+        #right{
+            transform: translateX(40px) rotateY(90deg);
+        }
+    </style>
+</head>
+<body class="bg-orange-200">
+    <div class="  flex justify-center items-center mx-auto ">
+         <!-- Result -->
+         <div id="result" class="hidden  absolute top-[20vh] bg-orange-200 w-2/3 h-[200px] p-5  md:w-[500px] md:h-[200px] z-20   flex flex-col gap-8 justify-center items-center">
+            <p class="text-center font-bold"  id="congratsOrDraw">Congratualtions!!</p>
+            <h2 class="text-center font-bold text-3xl" id="winner">
+                 
+            </h2>
+            <div class="flex justify-center items-center ">
+                <button id="replay" class=" py-1 px-5 bg-orange-500  text-white">Repaly</button>
+            </div>
+        </div>
+
+        <!-- game screen -->
+        <div class="flex flex-col items-center justify-center gap-5 w-4/5 bg-orange-200 p-3 mt-3"  id="game-screen"  >
+            <h1 class="text-center md:text-3xl text-2xl font-bold text-center ">Roll The  Dice</h1>
+            <div class="flex justify-between gap-5 items-center w-full">
+                <div class="border-2 border-black flex-1 h-full  p-5 md:w-auto w-full bg-white flex flex-col justify-center items-center gap-10">
+                    <h1 class="text-2xl font-bold text-center">Player 1</h1>
+                    <h1 class="text-8xl font-bold text-center " id="score1">0</h1>
+                </div>
+                <div class="border-2 border-black flex-1 h-full p-5 md:w-auto w-full bg-white flex flex-col justify-center items-center gap-10">
+                    <h1 class="text-2xl font-bold text-center">Player 2</h1>
+                    <h1 class="text-8xl font-bold text-center " id="score2">0</h1>
+                </div>
+            </div>
+            <div class="  dice-container w-full h-[85px] flex justify-center items-center ">
+                <div id="dice" class="relative cursor-pointer">
+                    <div class="sides" id="front"><p>1</p></div>
+                    <div class="sides" id="back"><p>2</p></div>
+                    <div class="sides" id="top"><p>3</p></div>
+                    <div class="sides" id="bottom"><p>4</p></div>
+                    <div class="sides" id="left"><p>5</p></div>
+                    <div class="sides" id="right"><p>6</p></div>
+                </div>
+            </div>
+            <audio src="./dice-142528.mp3" controls class="invisible h-[1px] w-[1px] p-0 m-0 hidden" id="audio" ></audio>
+            <div class="turn-information">
+                <h1 id="turn" class="text-center font-bold">Player 1</h1>
+                <p id="" class="text-center">It's your turn</p>
+            </div>
+        </div>
+    </div>
+    <script src="./index.js"></script>
+</body>
+</html>
